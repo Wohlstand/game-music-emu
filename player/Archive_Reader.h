@@ -57,3 +57,23 @@ public:
 };
 
 #endif // RARDLL
+
+
+#ifdef HAVE_LIBARCHIVE
+
+#include <archive.h>
+#include <archive_entry.h>
+
+class Zip_Reader : public Archive_Reader {
+	archive* zip = nullptr;
+	archive_entry* head = nullptr;
+	blargg_vector<char> filename;
+public:
+	static const uint32_t signature = BLARGG_4CHAR( 'P', 'K', 0x3, 0x4 );
+	blargg_err_t open_zip( const char* path );
+	blargg_err_t open( const char* path );
+	blargg_err_t next( void* buf_ptr, arc_entry_t* entry );
+	~Zip_Reader();
+};
+
+#endif // HAVE_LIBARCHIVE
