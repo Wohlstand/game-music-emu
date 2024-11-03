@@ -67,7 +67,6 @@ public:
 class Zip_Reader : public Archive_Reader {
 	archive* zip = nullptr;
 	archive_entry* head = nullptr;
-	blargg_vector<char> filename;
 public:
 	static const uint32_t signature = BLARGG_4CHAR( 'P', 'K', 0x3, 0x4 );
 	blargg_err_t open_zip( const char* path );
